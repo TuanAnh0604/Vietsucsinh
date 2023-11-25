@@ -38,6 +38,10 @@
             groupBoxData = new GroupBox();
             listViewWaterBill = new ListView();
             groupBoxUser = new GroupBox();
+            btnupload = new Button();
+            PictureBoxAvatar = new PictureBox();
+            label8 = new Label();
+            Delete = new Button();
             btnClear = new Button();
             btnRemove = new Button();
             btnAdd = new Button();
@@ -54,11 +58,13 @@
             tabPageExit = new TabPage();
             button1 = new Button();
             imageListTabPage = new ImageList(components);
+            openFileDialogavt = new OpenFileDialog();
             tabControlDashboard.SuspendLayout();
             tabPageHome.SuspendLayout();
             tabPageWater.SuspendLayout();
             groupBoxData.SuspendLayout();
             groupBoxUser.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)PictureBoxAvatar).BeginInit();
             tabPageExit.SuspendLayout();
             SuspendLayout();
             // 
@@ -72,7 +78,7 @@
             tabControlDashboard.Location = new Point(0, 0);
             tabControlDashboard.Name = "tabControlDashboard";
             tabControlDashboard.SelectedIndex = 0;
-            tabControlDashboard.Size = new Size(800, 450);
+            tabControlDashboard.Size = new Size(800, 612);
             tabControlDashboard.TabIndex = 0;
             // 
             // tabPageHome
@@ -83,7 +89,7 @@
             tabPageHome.Location = new Point(4, 39);
             tabPageHome.Name = "tabPageHome";
             tabPageHome.Padding = new Padding(3);
-            tabPageHome.Size = new Size(792, 407);
+            tabPageHome.Size = new Size(792, 569);
             tabPageHome.TabIndex = 0;
             tabPageHome.Text = "Home";
             tabPageHome.UseVisualStyleBackColor = true;
@@ -118,7 +124,7 @@
             tabPageWater.Location = new Point(4, 39);
             tabPageWater.Name = "tabPageWater";
             tabPageWater.Padding = new Padding(3);
-            tabPageWater.Size = new Size(792, 407);
+            tabPageWater.Size = new Size(792, 569);
             tabPageWater.TabIndex = 1;
             tabPageWater.Text = "Water Bill";
             tabPageWater.UseVisualStyleBackColor = true;
@@ -126,9 +132,9 @@
             // groupBoxData
             // 
             groupBoxData.Controls.Add(listViewWaterBill);
-            groupBoxData.Location = new Point(10, 205);
+            groupBoxData.Location = new Point(8, 307);
             groupBoxData.Name = "groupBoxData";
-            groupBoxData.Size = new Size(774, 194);
+            groupBoxData.Size = new Size(774, 162);
             groupBoxData.TabIndex = 1;
             groupBoxData.TabStop = false;
             groupBoxData.Text = "Data";
@@ -137,12 +143,16 @@
             // 
             listViewWaterBill.Location = new Point(6, 22);
             listViewWaterBill.Name = "listViewWaterBill";
-            listViewWaterBill.Size = new Size(762, 166);
+            listViewWaterBill.Size = new Size(762, 323);
             listViewWaterBill.TabIndex = 0;
             listViewWaterBill.UseCompatibleStateImageBehavior = false;
             // 
             // groupBoxUser
             // 
+            groupBoxUser.Controls.Add(btnupload);
+            groupBoxUser.Controls.Add(PictureBoxAvatar);
+            groupBoxUser.Controls.Add(label8);
+            groupBoxUser.Controls.Add(Delete);
             groupBoxUser.Controls.Add(btnClear);
             groupBoxUser.Controls.Add(btnRemove);
             groupBoxUser.Controls.Add(btnAdd);
@@ -158,10 +168,47 @@
             groupBoxUser.Controls.Add(label3);
             groupBoxUser.Location = new Point(8, 8);
             groupBoxUser.Name = "groupBoxUser";
-            groupBoxUser.Size = new Size(776, 178);
+            groupBoxUser.Size = new Size(776, 277);
             groupBoxUser.TabIndex = 0;
             groupBoxUser.TabStop = false;
             groupBoxUser.Text = "User's information";
+            // 
+            // btnupload
+            // 
+            btnupload.Location = new Point(273, 223);
+            btnupload.Name = "btnupload";
+            btnupload.Size = new Size(80, 23);
+            btnupload.TabIndex = 16;
+            btnupload.Text = "Choose File";
+            btnupload.UseVisualStyleBackColor = true;
+            btnupload.Click += btnupload_Click;
+            // 
+            // PictureBoxAvatar
+            // 
+            PictureBoxAvatar.Location = new Point(141, 166);
+            PictureBoxAvatar.Name = "PictureBoxAvatar";
+            PictureBoxAvatar.Size = new Size(113, 101);
+            PictureBoxAvatar.TabIndex = 15;
+            PictureBoxAvatar.TabStop = false;
+            // 
+            // label8
+            // 
+            label8.AutoSize = true;
+            label8.Location = new Point(89, 190);
+            label8.Name = "label8";
+            label8.Size = new Size(40, 15);
+            label8.TabIndex = 14;
+            label8.Text = "iamge";
+            // 
+            // Delete
+            // 
+            Delete.Location = new Point(605, 125);
+            Delete.Name = "Delete";
+            Delete.Size = new Size(75, 31);
+            Delete.TabIndex = 13;
+            Delete.Text = "Delete All";
+            Delete.UseVisualStyleBackColor = true;
+            Delete.Click += button2_Click;
             // 
             // btnClear
             // 
@@ -171,24 +218,27 @@
             btnClear.TabIndex = 12;
             btnClear.Text = "Clear";
             btnClear.UseVisualStyleBackColor = true;
+            btnClear.Click += btnClear_Click;
             // 
             // btnRemove
             // 
-            btnRemove.Location = new Point(533, 126);
+            btnRemove.Location = new Point(486, 125);
             btnRemove.Name = "btnRemove";
             btnRemove.Size = new Size(102, 30);
             btnRemove.TabIndex = 11;
             btnRemove.Text = "Remove Item";
             btnRemove.UseVisualStyleBackColor = true;
+            btnRemove.Click += btnRemove_Click;
             // 
             // btnAdd
             // 
-            btnAdd.Location = new Point(443, 126);
+            btnAdd.Location = new Point(405, 126);
             btnAdd.Name = "btnAdd";
             btnAdd.Size = new Size(75, 30);
             btnAdd.TabIndex = 10;
             btnAdd.Text = "Add +";
             btnAdd.UseVisualStyleBackColor = true;
+            btnAdd.Click += btnAdd_Click;
             // 
             // txtWaterCurrentMonth
             // 
@@ -227,7 +277,7 @@
             txtPeople.Enabled = false;
             txtPeople.Location = new Point(141, 125);
             txtPeople.Name = "txtPeople";
-            txtPeople.Size = new Size(243, 23);
+            txtPeople.Size = new Size(248, 23);
             txtPeople.TabIndex = 5;
             // 
             // label5
@@ -247,6 +297,8 @@
             cboCustomerType.Name = "cboCustomerType";
             cboCustomerType.Size = new Size(246, 23);
             cboCustomerType.TabIndex = 3;
+            cboCustomerType.SelectedIndexChanged += cboCustomerType_SelectedIndexChanged;
+            cboCustomerType.DropDownClosed += cboCustomerType_DropDownClosed;
             // 
             // label4
             // 
@@ -281,7 +333,7 @@
             tabPageExit.Location = new Point(4, 39);
             tabPageExit.Name = "tabPageExit";
             tabPageExit.Padding = new Padding(3);
-            tabPageExit.Size = new Size(792, 407);
+            tabPageExit.Size = new Size(792, 569);
             tabPageExit.TabIndex = 2;
             tabPageExit.Text = "Exit Application";
             tabPageExit.UseVisualStyleBackColor = true;
@@ -306,11 +358,15 @@
             imageListTabPage.Images.SetKeyName(1, "Bill-icon.png");
             imageListTabPage.Images.SetKeyName(2, "Users-Exit-icon.png");
             // 
+            // openFileDialogavt
+            // 
+            openFileDialogavt.FileName = "openFileDialog1";
+            // 
             // FormDashboard
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(800, 612);
             Controls.Add(tabControlDashboard);
             Name = "FormDashboard";
             Text = "Dashboard";
@@ -322,6 +378,7 @@
             groupBoxData.ResumeLayout(false);
             groupBoxUser.ResumeLayout(false);
             groupBoxUser.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)PictureBoxAvatar).EndInit();
             tabPageExit.ResumeLayout(false);
             ResumeLayout(false);
         }
@@ -352,5 +409,10 @@
         private Label label7;
         private GroupBox groupBoxData;
         private ListView listViewWaterBill;
+        private Button Delete;
+        private Button btnupload;
+        private PictureBox PictureBoxAvatar;
+        private Label label8;
+        private OpenFileDialog openFileDialogavt;
     }
 }
